@@ -1,0 +1,28 @@
+{
+	"info": "bla",
+	"recommendations":
+	{
+		"main":[
+			{
+				"ranking": 1,
+				"name" : "loan"
+			},
+			{
+				"ranking": 2,
+				"name": "saving"
+			}
+		],
+		"mobility":[
+			{
+				"ranking": 0,
+				"name": "full"		
+			},
+			{
+				"ranking": 3,
+				"name": "saversss"
+			}
+			
+		]
+
+	}
+}
