@@ -50,9 +50,13 @@ public class WorkerRestController {
 	@RequestMapping(path =  "/tresource", method = RequestMethod.GET)
 	public String getTResource() {
 		Processor processor = new Processor();
-		String result = processor.invoke2();
+		String result = processor.invoke();
 		log.info(result);
-		return result;
+		
+		String result2 = processor.invoke2();
+		log.info(result2);
+		
+		return new StringBuilder(20).append(result).append(" - ").append(result2).toString();
 	}
 	
 	@RequestMapping(path = "/lazyworker", method = RequestMethod.GET)
