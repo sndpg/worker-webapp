@@ -130,6 +130,12 @@
 			<artifactId>tcall</artifactId>
 			<version>0.0.2-SNAPSHOT</version>
 		</dependency>
+		<!-- https://mvnrepository.com/artifact/io.swagger.core.v3/swagger-annotations -->
+		<dependency>
+			<groupId>io.swagger.core.v3</groupId>
+			<artifactId>swagger-annotations</artifactId>
+			<version>2.0.5</version>
+		</dependency>
 	</dependencies>
 
 	<build>
@@ -152,6 +158,62 @@
 						<version>6.2</version> <!-- Use newer version of ASM -->
 					</dependency>
 				</dependencies>
+			</plugin>
+			<plugin>
+				<groupId>com.github.kongchen</groupId>
+				<artifactId>swagger-maven-plugin</artifactId>
+				<version>3.1.7</version>
+				<configuration>
+					<apiSources>
+						<apiSource>
+							<springmvc>true</springmvc>
+							<locations>org.psc.web.WorkerRestController</locations>
+							<schemes>http</schemes>
+							<host>localhost:8080</host>
+							<basePath>/workerapp</basePath>
+							<info>
+								<title>Worker Webapp</title>
+								<version>v1</version>
+								<description>
+									Test rest app
+								</description>
+							</info>
+							<swaggerDirectory>${basedir}/generated/swagger-ui</swaggerDirectory>
+						</apiSource>
+					</apiSources>
+				</configuration>
+				<executions>
+					<execution>
+						<phase>compile</phase>
+						<goals>
+							<goal>generate</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>io.swagger.core.v3</groupId>
+				<artifactId>swagger-maven-plugin</artifactId>
+				<version>2.0.5</version>
+				<configuration>
+					<outputFileName>openapi</outputFileName>
+					<outputPath>${project.build.directory}/generatedtest</outputPath>
+					<outputFormat>JSONANDYAML</outputFormat>
+					<resourcePackages>
+						<package>org.psc.web</package>
+					</resourcePackages>
+					<resourceClasses>org.psc.web.WorkerRestController
+					</resourceClasses>
+					<prettyPrint>TRUE</prettyPrint>
+				</configuration>
+				<executions>
+					<execution>
+						<phase>compile</phase>
+						<goals>
+							<goal>resolve</goal>
+						</goals>
+					</execution>
+				</executions>
 			</plugin>
 		</plugins>
 	</build>

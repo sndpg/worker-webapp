@@ -1,0 +1,65 @@
+{
+  "swagger" : "2.0",
+  "info" : {
+    "description" : "Test rest app",
+    "version" : "v1",
+    "title" : "Worker Webapp"
+  },
+  "host" : "localhost:8080",
+  "basePath" : "/workerapp",
+  "schemes" : [ "http" ],
+  "paths" : {
+    "/workerapp/lazyworker" : {
+      "get" : {
+        "summary" : "lazyworker resource",
+        "description" : "a lazy worker",
+        "operationId" : "getLazyWorker",
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "schema" : {
+              "type" : "string"
+            }
+          }
+        }
+      }
+    },
+    "/workerapp/tresource" : {
+      "get" : {
+        "summary" : "test resource",
+        "description" : "a test",
+        "operationId" : "getTResource",
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "schema" : {
+              "type" : "string"
+            }
+          }
+        }
+      }
+    },
+    "/workerapp/worker" : {
+      "get" : {
+        "summary" : "worker resource",
+        "description" : "more work",
+        "operationId" : "getWorker",
+        "parameters" : [ {
+          "name" : "param",
+          "in" : "query",
+          "description" : "the param",
+          "required" : false,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "schema" : {
+              "type" : "string"
+            }
+          }
+        }
+      }
+    }
+  }
+}
