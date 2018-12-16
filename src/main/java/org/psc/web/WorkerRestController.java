@@ -39,51 +39,50 @@ import tcall.Processor;
 @RequestMapping("/workerapp")
 public class WorkerRestController {
 
-	@Autowired
-	private ObjectMapper objectMapper;
+    @Autowired
+    private ObjectMapper objectMapper;
 
-	@PostConstruct
-	public void init() {
-		SimpleModule module = new SimpleModule();
-		module.addDeserializer(Recommendation.class, new RecommendationDeserializer());
-		objectMapper.registerModule(module);
-	}
+    @PostConstruct
+    public void init() {
+        SimpleModule module = new SimpleModule();
+        module.addDeserializer(Recommendation.class, new RecommendationDeserializer());
+        objectMapper.registerModule(module);
+    }
 
-	
-	@ApiOperation(value = "worker resource", notes = "more work")
-	@Operation(summary = "worker resource", description = "more work", responses = {
-			@ApiResponse(description = "the work status", content = @Content(mediaType = "application/json", schema = @Schema(implementation = String.class))),
-			@ApiResponse(responseCode = "400", description = "an error") })
-	@RequestMapping(path = "/worker", method = RequestMethod.GET)
-	public String getWorker(
-			@ApiParam(value = "the param", required = false) @Parameter(description = "the param", required = false) @RequestParam(required = false) String param)
-			throws IOException {
-		Path path = Paths.get("src/main/resources/test.json");
-		String content = new String(Files.readAllBytes(path), StandardCharsets.UTF_8);
-		Recommendation rec = objectMapper.readValue(content, Recommendation.class);
+    @ApiOperation(value = "worker resource", notes = "more work")
+    @Operation(summary = "worker resource", description = "more work", responses = {
+            @ApiResponse(description = "the work status", content = @Content(mediaType = "application/json", schema = @Schema(implementation = String.class))),
+            @ApiResponse(responseCode = "400", description = "an error") })
+    @RequestMapping(path = "/worker", method = RequestMethod.GET)
+    public String getWorker(
+            @ApiParam(value = "the param", required = false) @Parameter(description = "the param", required = false) @RequestParam(required = false) String param)
+            throws IOException {
+        Path path = Paths.get("src/main/resources/test.json");
+        String content = new String(Files.readAllBytes(path), StandardCharsets.UTF_8);
+        Recommendation rec = objectMapper.readValue(content, Recommendation.class);
 
-		log.info(objectMapper.writeValueAsString(rec));
+        log.info(objectMapper.writeValueAsString(rec));
 
-		return objectMapper.writeValueAsString(rec);
-	}
+        return objectMapper.writeValueAsString(rec);
+    }
 
-	@ApiOperation(value = "test resource", notes = "a test")
-	@RequestMapping(path = "/tresource", method = RequestMethod.GET)
-	public String getTResource() {
-		Processor processor = new Processor();
-		String result = processor.invoke();
-		log.info(result);
+    @ApiOperation(value = "test resource", notes = "a test")
+    @RequestMapping(path = "/tresource", method = RequestMethod.GET)
+    public String getTResource() {
+        Processor processor = new Processor();
+        String result = processor.invoke();
+        log.info(result);
 
-		String result2 = processor.invoke2();
-		log.info(result2);
+        String result2 = processor.invoke2();
+        log.info(result2);
 
-		return new StringBuilder(20).append(result).append(" - ").append(result2).toString();
-	}
-	
-	@ApiOperation(value = "lazyworker resource", notes = "a lazy worker")
-	@RequestMapping(path = "/lazyworker", method = RequestMethod.GET)
-	public String getLazyWorker() throws IOException {
-		return "OK";
-	}
+        return new StringBuilder(20).append(result).append(" - ").append(result2).toString();
+    }
+
+    @ApiOperation(value = "lazyworker resource", notes = "a lazy worker")
+    @RequestMapping(path = "/lazyworker", method = RequestMethod.GET)
+    public String getLazyWorker() throws IOException {
+        return "OK";
+    }
 
 }
